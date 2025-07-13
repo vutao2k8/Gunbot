@@ -1,26 +1,27 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>GunBot - Nhạc nền</title>
 </head>
 <body>
-  <audio id="bgMusic" src="sounds/menu.mp3" loop></audio>
+  <audio id="bgMusic" src="sounds/menu.mp3" autoplay loop></audio>
 
   <script>
     const music = document.getElementById("bgMusic");
     music.volume = 0.5;
 
-    // Lắng nghe các lệnh từ trang cha (index.html, menu.html)
+    // Nhận lệnh từ menu để dừng nhạc
     window.addEventListener("message", (event) => {
-      if (event.data === "playMusic") {
-        music.play().catch((err) => {
-          console.warn("Không phát được nhạc:", err);
-        });
-      } else if (event.data === "stopMusic") {
+      if (event.data === "stopMusic") {
         music.pause();
         music.currentTime = 0;
       }
+    });
+
+    // Bắt đầu phát nhạc (có thể bị trình duyệt chặn nếu không có tương tác)
+    music.play().catch(() => {
+      console.warn("Autoplay bị chặn. Nhạc sẽ phát sau khi người dùng click.");
     });
   </script>
 </body>
