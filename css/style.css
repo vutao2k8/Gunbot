@@ -1,4 +1,83 @@
+/* style.css */
 body {
-  background-color: black;
-  color: white;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to bottom, #ff0000de, #00fff2);
+    color: rgb(0, 0, 0);
+    text-align: center;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .menu-container,
+  .login-container,
+  .share-container,
+  .leaderboard-container {
+    padding: 30px;
+    max-width: 500px;
+    margin: 50px auto;
+    background-color: #ffe600;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(255,255,255,0.2);
+  }
+  
+  button {
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 18px;
+    background-color: #0099cc;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  button:hover {
+    background-color: #0077aa;
+  }
+  
+  input[type="text"],
+  input[type="password"] {
+    padding: 10px;
+    margin: 10px;
+    width: 80%;
+    font-size: 16px;
+    border: 1px solid #555;
+    border-radius: 6px;
+    background-color: #444;
+    color: white;
+  }
+  
+  canvas {
+    background: rgb(161, 155, 155);
+    display: block;
+    margin: 20px auto;
+    border: 2px solid white;
+  }
+  
+  .mobile-controls {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 15px;
+  }
+  
+  .mobile-controls button {
+    padding: 15px;
+    background-color: rgba(255,255,255,0.2);
+    font-size: 20px;
+    border-radius: 50%;
+    border: 1px solid white;
+    color: white;
+  }
+  .game-title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.game-title img {
+  max-width: 80%;
+  height: auto;
 }
