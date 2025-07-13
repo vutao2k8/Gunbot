@@ -11,19 +11,21 @@
     const music = document.getElementById("bgMusic");
     music.volume = 0.5;
 
+    // Lắng nghe lệnh từ cửa sổ cha
     window.addEventListener("message", (event) => {
       if (event.data === "stopMusic") {
         music.pause();
         music.currentTime = 0;
       } else if (event.data === "resumeMusic") {
         music.play().catch(() => {
-          console.warn("Không thể phát nhạc lại (trình duyệt chặn hoặc chưa click)");
+          console.warn("Không thể bật lại nhạc (bị chặn)");
         });
       }
     });
 
+    // Thử phát nhạc ngay khi tải
     music.play().catch(() => {
-      console.warn("Autoplay bị chặn. Nhạc sẽ phát sau tương tác.");
+      console.warn("Autoplay bị chặn. Người dùng cần click.");
     });
   </script>
 </body>
