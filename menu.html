@@ -56,6 +56,8 @@
     <button onclick="window.location.href='share.html'">📢 Chia Sẻ Game</button>
     <br>
     <button onclick="toggleMusic()">🔈 Tắt nhạc</button>
+    <button onclick="resumeMusic()">🎵 Bật nhạc</button>
+
   </div>
   <div class="copyright">
   <img src="assets/images/logo.png" alt="Logo Táo Bắc Việt Team" class="logo" style="width: 150px; height: auto;">
@@ -81,6 +83,16 @@
         alert("🎵 Nhạc đã tắt.");
       } else {
         alert("⚠ Không tìm thấy nhạc đang phát.");
+        function resumeMusic() {
+  const musicWindow = window.open('', 'musicWindow');
+  if (musicWindow) {
+    musicWindow.postMessage('resumeMusic', '*');
+    alert("🎶 Đã gửi lệnh bật lại nhạc.");
+  } else {
+    alert("⚠ Không tìm thấy cửa sổ nhạc.");
+  }
+}
+
       }
     }
   </script>
