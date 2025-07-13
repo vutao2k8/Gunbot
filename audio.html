@@ -1,27 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html lang="vi">
 <head>
   <meta charset="UTF-8" />
-  <title>Music Player</title>
+  <title>GunBot - Nhạc nền</title>
 </head>
 <body>
-  <audio id="bgMusic" src="sounds/menu-music.mp3" loop></audio>
+  <audio id="bgMusic" src="sounds/menu.mp3" loop></audio>
 
   <script>
-    const bgMusic = document.getElementById("bgMusic");
+    const music = document.getElementById("bgMusic");
+    music.volume = 0.5;
 
-    window.addEventListener("message", (e) => {
-      if (e.data === "playMusic") {
-        bgMusic.play().catch(err => {
-          console.warn("Autoplay bị chặn:", err);
+    // Lắng nghe các lệnh từ trang cha (index.html, menu.html)
+    window.addEventListener("message", (event) => {
+      if (event.data === "playMusic") {
+        music.play().catch((err) => {
+          console.warn("Không phát được nhạc:", err);
         });
-      } else if (e.data === "stopMusic") {
-        bgMusic.pause();
+      } else if (event.data === "stopMusic") {
+        music.pause();
+        music.currentTime = 0;
       }
     });
-
-    // Mở popup này có tên để menu.html có thể truy cập
-    window.name = "musicWindow";
   </script>
 </body>
 </html>
