@@ -8,25 +8,14 @@
   <link rel="icon" type="image/png" href="assets/images/logoweb.png">
 </head>
 <body>
-  <!-- Nhúng nhạc ẩn bằng iframe -->
-  <iframe
-    id="musicFrame"
-    src="audio.html"
-    style="display:none"
-    allow="autoplay"
-  ></iframe>
-
   <!-- Ảnh tiêu đề game -->
   <div class="game-title">
     <img src="assets/images/Gunbot1.png" alt="Gunbot" style="max-width: 80%; height: auto;">
   </div>
 
-  <!-- Khối chứa logo, form đăng nhập và phần chào mừng -->
   <div class="login-wrapper" style="display: flex; align-items: flex-start; justify-content: center; gap: 30px; margin-top: 30px; flex-wrap: wrap;">
-    <!-- Logo game -->
     <img src="assets/images/tggame.png" alt="Thông tin tác giả" width="400" height="500" />
 
-    <!-- Form đăng nhập -->
     <div class="login-container" style="display: flex; flex-direction: column; gap: 50px; max-width: 300px;">
       <h2>Đăng nhập để chơi game</h2>
       <input type="text" id="username" placeholder="Nhập tên người chơi" required>
@@ -39,7 +28,6 @@
       <button onclick="login()">🎮 Bắt đầu chơi</button>
     </div>
 
-    <!-- Khối chào mừng -->
     <div class="welcome-box" style="max-width: 300px; padding: 20px; background: rgba(255,255,255,0.05); border-radius: 20px; color: white; box-shadow: 0 0 10px rgba(0,255,255,0.2);">
       <h3 style="color: #00ffff;">👋 Chào mừng đến với GunBot!</h3>
       <p style="line-height: 1.6;">
@@ -50,13 +38,14 @@
     </div>
   </div>
 
-  <!-- Bản quyền -->
   <div class="copyright">
     <img src="assets/images/logo.png" alt="Logo Táo Bắc Việt Team" class="logo" style="width: 150px; height: auto;">
     <p>© 2025 TBV Play<br>Thiết kế và phát triển bởi <strong>Táo Bắc Việt Team</strong></p>
   </div>
 
   <script>
+    let musicWindow;
+
     function login() {
       const name = document.getElementById("username").value.trim();
       const character = document.querySelector("input[name='character']:checked").value;
@@ -69,8 +58,10 @@
       localStorage.setItem("username", name);
       localStorage.setItem("character", character);
 
-      const musicFrame = document.getElementById("musicFrame");
-      musicFrame.contentWindow.postMessage("playMusic", "*");
+      // 👉 Mở nhạc ở cửa sổ riêng (một lần duy nhất)
+      if (!musicWindow || musicWindow.closed) {
+        musicWindow = window.open("audio.html", "musicWindow");
+      }
 
       setTimeout(() => {
         window.location.href = "menu.html";
