@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <script src="js/leaderboard.js"></script>
+  <meta charset="UTF-8">
+  <title>Bảng Xếp Hạng GunBot</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+    }
+    h1 {
+      color: #0f0;
+    }
+    table {
+      margin: 20px auto;
+      border-collapse: collapse;
+      width: 80%;
+      background-color: #222;
+    }
+    th, td {
+      border: 1px solid #444;
+      padding: 10px;
+    }
+    th {
+      background-color: #333;
+      color: #0f0;
+    }
+    tr:nth-child(even) {
+      background-color: #1a1a1a;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #f00;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      border-radius: 6px;
+    }
+    button:hover {
+      background: #c00;
+    }
+  </style>
+</head>
+<body>
+  <h1>🏆 Bảng Xếp Hạng GunBot</h1>
+
+  <table>
+    <div style="margin-top: 20px; text-align: center;">
+  <button onclick="window.location.href='menu.html'" style="margin: 8px; padding: 10px 20px;">🏠 Về Menu</button>
+  <button onclick="window.location.href='game.html'" style="margin: 8px; padding: 10px 20px;">🔁 Chơi Lại</button>
+  <button onclick="window.location.href='share.html'" style="margin: 8px; padding: 10px 20px;">🔗 Chia Sẻ</button>
+</div>
+
+    <thead>
+      <tr>
+        <th>Thứ hạng</th>
+        <th>Tên</th>
+        <th>Vòng</th>
+        <th>Thời gian (giây)</th>
+      </tr>
+    </thead>
+    <tbody id="leaderboardBody">
+      <!-- Dữ liệu sẽ được thêm vào đây -->
+    </tbody>
+  </table>
+
+  <button onclick="clearLeaderboard()">🗑️ Xoá bảng xếp hạng</button>
+
+  <script>
+    function loadLeaderboard() {
+      const data = JSON.parse(localStorage.getItem("leaderboard") || "[]");
+
+      // Sắp xếp: vòng cao nhất → thời gian ít nhất
+      data.sort((a, b) => b.level - a.level || a.time - b.time);
+
+      const tbody = document.getElementById("leaderboardBody");
+      tbody.innerHTML = "";
+
+      data.forEach((entry, index) => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${index + 1}</td>
+          <td>${entry.name}</td>
+          <td>${entry.level}</td>
+          <td>${entry.time}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function clearLeaderboard() {
+      if (confirm("Bạn có chắc muốn xoá bảng xếp hạng?")) {
+        localStorage.removeItem("leaderboard");
+        loadLeaderboard();
+      }
+    }
+
+    loadLeaderboard();
+  </script>
+</div>
+</body>
+</html>
+

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Music Player</title>
+</head>
+<body>
+  <audio id="bgMusic" src="sounds/menu-music.mp3" loop></audio>
+
+  <script>
+    const bgMusic = document.getElementById("bgMusic");
+
+    window.addEventListener("message", (e) => {
+      if (e.data === "playMusic") {
+        bgMusic.play().catch(err => {
+          console.warn("Autoplay bị chặn:", err);
+        });
+      } else if (e.data === "stopMusic") {
+        bgMusic.pause();
+      }
+    });
+
+    // Mở popup này có tên để menu.html có thể truy cập
+    window.name = "musicWindow";
+  </script>
+</body>
+</html>

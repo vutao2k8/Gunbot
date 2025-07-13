@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chơi Game</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    #gameControls {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      z-index: 10;
+    }
+    #gameControls button {
+      background: rgba(87, 85, 85, 0.5);
+      border: 1px solid white;
+      color: white;
+      font-size: 14px;
+      padding: 6px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    #gameControls button:hover {
+      background: rgba(3, 3, 3, 0.466);
+    }
+  </style>
+</head>
+<body>
+  <canvas id="gameCanvas" width="800" height="600"></canvas>
+
+  <div id="gameControls">
+    <button onclick="window.location.href='menu.html'">🏠 Menu</button>
+   <button onclick="window.location.href='share.html'">📤 Chia sẻ</button>
+    <button onclick="window.open('https://www.google.com','_blank')">❌ Thoát</button>
+  </div>
+
+  <div id="gameOverScreen" style="display: none; text-align: center; margin-top: 20px;">
+    <h2>💀 Bạn đã bị tiêu diệt!</h2>
+    <p id="finalLevel">Bạn dừng lại ở vòng ...</p>
+    <button onclick="window.location.href='menu.html'">🏠 Quay về menu</button>
+    <button onclick="window.location.href='game.html'">🔁 Chơi lại</button>
+    <button onclick="window.location.href='leaderboard.html'">🏆 Xem bảng xếp hạng</button>
+  </div>
+
+  <div class="hud">
+    <p>❤️ HP: <span id="hp">100</span></p>
+    <p>⚔️ Đam: <span id="damage">20</span></p>
+    <p>🧟 Quái còn lại: <span id="enemyCount">0</span></p>
+    <p>📦 Vòng: <span id="level">1</span></p>
+  </div>
+
+  <script src="js/game.js"></script>
+</body>
+</html>

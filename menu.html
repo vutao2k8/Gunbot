@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Menu Chính</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    body {
+      text-align: center;
+      font-family: Arial, sans-serif;
+      background-color: #86e5ff;
+      color: #ff8888;
+      padding: 40px;
+    }
+
+    .menu-container {
+      background-color: #ffb866;
+      padding: 30px;
+      border-radius: 15px;
+      display: inline-block;
+      box-shadow: 0 0 15px rgb(255, 209, 2);
+    }
+
+    button {
+      margin: 10px;
+      padding: 12px 24px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      background-color: #50ffe8e0;
+      color: rgb(0, 0, 0);
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+
+    .copyright {
+      margin-top: 40px;
+      font-size: 14px;
+      color: #000000;
+      text-align: center;
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+  <div class="menu-container">
+    <h2>Xin chào, <span id="playerName"></span>!</h2>
+    <h3>Nhân vật: <span id="characterChosen"></span></h3>
+
+    <button onclick="startGame()">🎮 Chơi Game</button>
+    <button onclick="window.location.href='leaderboard.html'">📊 Bảng Thành Tích</button>
+    <button onclick="window.location.href='share.html'">📢 Chia Sẻ Game</button>
+    <br>
+    <button onclick="toggleMusic()">🔈 Tắt nhạc</button>
+  </div>
+  <div class="copyright">
+  <img src="assets/images/logo.png" alt="Logo Táo Bắc Việt Team" class="logo" style="width: 150px; height: auto;">
+  <p>© 2025 TBV Play<br>Thiết kế và phát triển bởi <strong>Táo Bắc Việt Team </strong></p>
+</div>
+
+  <script>
+    // Hiển thị thông tin người chơi
+    const name = localStorage.getItem("username") || "Người chơi";
+    const character = localStorage.getItem("character") || "chưa chọn";
+    document.getElementById("playerName").textContent = name;
+    document.getElementById("characterChosen").textContent = character;
+
+    function startGame() {
+      window.location.href = "game.html";
+    }
+
+    function toggleMusic() {
+      // Gửi lệnh đến audio.html trong iframe đang mở
+      const musicWindow = window.open('', 'musicWindow');
+      if (musicWindow) {
+        musicWindow.postMessage('stopMusic', '*');
+        alert("🎵 Nhạc đã tắt.");
+      } else {
+        alert("⚠ Không tìm thấy nhạc đang phát.");
+      }
+    }
+  </script>
+</body>
+</html>

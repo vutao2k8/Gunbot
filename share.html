@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Chia sẻ Game GunBot</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      margin-top: 100px;
+      background-color: #fa7575;
+    }
+    .share-box {
+      background: white;
+      padding: 30px;
+      display: inline-block;
+      border-radius: 15px;
+      box-shadow: 0 0 10px gray;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+    }
+  </style>
+</head>
+<div style="margin-top: 30px; text-align: center;">
+  <button onclick="window.location.href='menu.html'" style="margin: 10px;">🏠 Về Menu</button>
+  <button onclick="window.location.href='leaderboard.html'" style="margin: 10px;">📊 Xem Bảng Xếp Hạng</button>
+  <button onclick="window.location.href='game.html'" style="margin: 10px;">🔁 Chơi Lại</button>
+</div>
+
+<body>
+  <div class="share-box">
+    <h1>📢 Chia sẻ Game GunBot!</h1>
+    <p>Bấm nút bên dưới để sao chép đường dẫn game và chia sẻ cho bạn bè.</p>
+    <input type="text" id="gameLink" value="https://yourdomain.com/game.html" readonly style="width: 100%; padding: 10px;">
+    <button onclick="copyLink()">📋 Sao chép liên kết</button>
+    <p id="status" style="color: green; margin-top: 10px;"></p>
+  </div>
+
+  <script>
+    function copyLink() {
+      const input = document.getElementById("gameLink");
+      input.select();
+      input.setSelectionRange(0, 99999); // mobile support
+      document.execCommand("copy");
+      document.getElementById("status").textContent = "✅ Đã sao chép liên kết!";
+    }
+  </script>
+</body>
+</html>
