@@ -74,27 +74,29 @@
     function startGame() {
       window.location.href = "game.html";
     }
-
-    function toggleMusic() {
-      // Gửi lệnh đến audio.html trong iframe đang mở
-      const musicWindow = window.open('', 'musicWindow');
-      if (musicWindow) {
-        musicWindow.postMessage('stopMusic', '*');
-        alert("🎵 Nhạc đã tắt.");
-      } else {
-        alert("⚠ Không tìm thấy nhạc đang phát.");
-        function resumeMusic() {
+function toggleMusic() {
   const musicWindow = window.open('', 'musicWindow');
   if (musicWindow) {
-    musicWindow.postMessage('resumeMusic', '*');
-    alert("🎶 Đã gửi lệnh bật lại nhạc.");
+    musicWindow.postMessage('stopMusic', '*');
+    alert("🎵 Nhạc đã tắt.");
   } else {
-    alert("⚠ Không tìm thấy cửa sổ nhạc.");
+    alert("⚠ Không tìm thấy nhạc đang phát.");
   }
 }
 
-      }
-    }
+function resumeMusic() {
+  let musicWindow = window.open('', 'musicWindow');
+
+  // Nếu không mở được, thử mở lại
+  if (!musicWindow || musicWindow.closed) {
+    musicWindow = window.open('audio.html', 'musicWindow');
+    alert("🎶 Đã mở lại cửa sổ nhạc.");
+  } else {
+    musicWindow.postMessage('resumeMusic', '*');
+    alert("🎶 Đã gửi lệnh bật lại nhạc.");
+  }
+}
+  
   </script>
 </body>
 </html>
