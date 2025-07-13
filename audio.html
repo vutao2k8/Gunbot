@@ -5,23 +5,25 @@
   <title>GunBot - Nhạc nền</title>
 </head>
 <body>
-  <audio id="bgMusic" src="sounds/menu-music.mp3" autoplay loop></audio>
+  <audio id="bgMusic" src="sounds/menu.mp3" autoplay loop></audio>
 
   <script>
     const music = document.getElementById("bgMusic");
     music.volume = 0.5;
 
-    // Nhận lệnh từ menu để dừng nhạc
     window.addEventListener("message", (event) => {
       if (event.data === "stopMusic") {
         music.pause();
         music.currentTime = 0;
+      } else if (event.data === "resumeMusic") {
+        music.play().catch(() => {
+          console.warn("Không thể phát nhạc lại (trình duyệt chặn hoặc chưa click)");
+        });
       }
     });
 
-    // Bắt đầu phát nhạc (có thể bị trình duyệt chặn nếu không có tương tác)
     music.play().catch(() => {
-      console.warn("Autoplay bị chặn. Nhạc sẽ phát sau khi người dùng click.");
+      console.warn("Autoplay bị chặn. Nhạc sẽ phát sau tương tác.");
     });
   </script>
 </body>
